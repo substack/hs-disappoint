@@ -1,10 +1,14 @@
 module Language.Haskell.Pointfree where
 
 import Language.Haskell.Exts
-import Language.Pointfree.Parser
 
 import Control.Applicative ((<$>),(<*>))
 import Control.Arrow ((&&&))
+import Data.Maybe
+
+import qualified Data.Map as M
+import Data.Graph (stronglyConnComp, flattenSCC, flattenSCCs)
+import Control.Monad.State
 
 transform :: Exp -> Exp
 transform expr = undefined
@@ -34,3 +38,10 @@ fromModule (Module loc name pragmas mWarn mExports imports decls) =
             imports'' = if elem "Prelude" $ map fst imports'
                 then imports'
                 else ("Prelude",Nothing) : imports'
+
+main = do
+    m <- loadModule "test.hs"
+    let rhs (PatBind _ pvar _ (UnGuardedRhs expr) _) = Just expr
+        rhs _ = Nothing
+        exps = mapMaybe rhs $ pmDecls m
+    print exps
