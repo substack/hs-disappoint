@@ -1,12 +1,13 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
+{-# LANGUAGE PatternGuards #-}
 --
 -- Todo, use Language.Haskell
 --
 -- Doesn't handle string literals?
 --
-module Plugin.Pl.Parser (parsePF) where
+module Language.Haskell.Pointfree.Parser (parsePF) where
 
-import Plugin.Pl.Common
+import Language.Haskell.Pointfree.Common
 
 import Text.ParserCombinators.Parsec
 import Text.ParserCombinators.Parsec.Expr

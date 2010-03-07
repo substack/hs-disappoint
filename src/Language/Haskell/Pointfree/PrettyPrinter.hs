@@ -1,9 +1,10 @@
 {-# OPTIONS -fvia-C -fno-warn-orphans #-}
-module Plugin.Pl.PrettyPrinter (Expr) where
+{-# LANGUAGE PatternGuards #-}
+module Language.Haskell.Pointfree.PrettyPrinter (Expr) where
 
 -- Dummy export to make ghc -Wall happy
 
-import Plugin.Pl.Common
+import Language.Haskell.Pointfree.Common
 
 instance Show Decl where
   show (Define f e) = f ++ " = " ++ show e

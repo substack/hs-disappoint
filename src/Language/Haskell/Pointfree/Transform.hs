@@ -1,10 +1,11 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
-module Plugin.Pl.Transform (
+{-# LANGUAGE PatternGuards #-}
+module Language.Haskell.Pointfree.Transform (
     transform,
   ) where
 
-import Plugin.Pl.Common
-import Plugin.Pl.PrettyPrinter
+import Language.Haskell.Pointfree.Common
+import Language.Haskell.Pointfree.PrettyPrinter
 
 import qualified Data.Map as M
 

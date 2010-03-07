@@ -1,6 +1,6 @@
 {-# OPTIONS -fvia-C #-}
 
-module Plugin.Pl.Common (
+module Language.Haskell.Pointfree.Common (
         Fixity(..), Expr(..), Pattern(..), Decl(..), TopLevel(..),
         bt, sizeExpr, mapTopLevel, mapTopLevel', getExpr,
         operators, opchars, reservedOps, lookupOp, lookupFix, minPrec, maxPrec,

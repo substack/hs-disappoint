@@ -1,13 +1,16 @@
 {-# OPTIONS -fvia-C #-}
 {-# OPTIONS -fno-warn-name-shadowing #-}
+{-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE PatternGuards #-}
 -- 6.4 gives a name shadow warning I haven't tracked down.
 
 --
 -- | This marvellous module contributed by Thomas J\344ger
 --
-module Plugin.Pl.Rules (RewriteRule(..), rules, fire) where
+module Language.Haskell.Pointfree.Rules (RewriteRule(..), rules, fire) where
 
-import Plugin.Pl.Common
+import Language.Haskell.Pointfree.Common
 
 import Data.Array
 import qualified Data.Set as S
@@ -95,8 +98,7 @@ instance RewriteC a => RewriteC (MExpr -> a) where
   getRewrite rule = Rewrite {
     holes = holes . getRewrite . rule . Hole $ pid,
     rid   = pid + 1
-  } where 
-    pid = rid $ getRewrite (bt :: a)
+  } where pid = 0 -- rid $ getRewrite undefined
 
 -- Yet another pointless transformation
 transformM :: Int -> MExpr -> MExpr

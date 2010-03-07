@@ -1,11 +1,12 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
-module Plugin.Pl.Optimize (
+{-# OPTIONS -fglasgow-exts #-}
+module Language.Haskell.Pointfree.Optimize (
     optimize,
   ) where
 
-import Plugin.Pl.Common
-import Plugin.Pl.Rules
-import Plugin.Pl.PrettyPrinter
+import Language.Haskell.Pointfree.Common
+import Language.Haskell.Pointfree.Rules
+import Language.Haskell.Pointfree.PrettyPrinter
 
 import Data.List (nub)
 import Control.Monad.State
