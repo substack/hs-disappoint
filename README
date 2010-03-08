@@ -1,10 +1,5 @@
-Pointfree refactoring library
+Pointfree Refactoring Library
 =============================
 
-Project clearcut turns the stand-alone command-line pointfree package into a
+Disappoint turns the stand-alone command-line pointfree package into a
 library and adds some very superficial haskell-src parsing on top.
-
-Clearcut takes its name from deforestation, the process of removing trees from
-programs.
-
-http://en.wikipedia.org/wiki/Deforestation_(computer_science)
