@@ -1,5 +1,4 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
-{-# OPTIONS -fglasgow-exts #-}
 module Language.Haskell.Pointfree.Optimize (
     optimize,
   ) where

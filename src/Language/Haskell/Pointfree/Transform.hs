@@ -1,5 +1,4 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
-{-# LANGUAGE PatternGuards #-}
 module Language.Haskell.Pointfree.Transform (
     transform,
   ) where

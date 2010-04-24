@@ -11,8 +11,9 @@ import Language.Haskell.Pointfree.PrettyPrinter
 import Language.Haskell.Exts
 
 import Control.Applicative ((<$>),(<*>))
-import Control.Arrow ((&&&))
+import Control.Arrow ((&&&),first,second)
 import Data.Maybe (mapMaybe)
+import Data.String.Utils (replace)
 
 type ImportQ = (String,Maybe String)
 
@@ -51,7 +52,28 @@ fromModule (Module loc name pragmas mWarn mExports imports decls) =
             f (Match _ (Ident ident) _ _ _ _) = Just (ident,bind)
         rhs _ = Nothing
 
-pointfree :: (Pretty a, Show a, Parseable a) => a -> Either String a
+-- | Convert the expression into a simplified form understood by parsePF.
+-- | Namely: convert patterns and guards to cases and wheres to lets.
+convert :: Exp -> Exp
+convert (Let (BDecls decls) expr) = Let (BDecls $ concatMap f decls) expr
+    where
+        f :: Decl -> [Decl]
+        --f (FunBind matches) = FunBind $ map g matches
+        f bind = [bind]
+        
+        g :: Match -> (Match,[Decl])
+        g (Match loc name pats mType rhs (BDecls iDecls)) =
+            (Match loc name pats mType rhs (BDecls []), iDecls)
+        g m = (m,[])
+convert expr = expr
+
+makeOneLiner :: String -> String
+makeOneLiner = replace "\n    " ";"
+
+ok (ParseOk x) = x
+r (Right x) = x
+
+pointfree :: Exp -> Either String Exp
 pointfree expr = 
     case parsePF $ prettyPrint expr of
         Right d ->

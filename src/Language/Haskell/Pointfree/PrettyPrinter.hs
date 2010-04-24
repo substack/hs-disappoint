@@ -1,5 +1,4 @@
 {-# OPTIONS -fvia-C -fno-warn-orphans #-}
-{-# LANGUAGE PatternGuards #-}
 module Language.Haskell.Pointfree.PrettyPrinter (Expr) where
 
 -- Dummy export to make ghc -Wall happy

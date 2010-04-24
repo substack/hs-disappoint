@@ -1,8 +1,5 @@
 {-# OPTIONS -fvia-C #-}
 {-# OPTIONS -fno-warn-name-shadowing #-}
-{-# LANGUAGE ExistentialQuantification #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE PatternGuards #-}
 -- 6.4 gives a name shadow warning I haven't tracked down.
 
 --
@@ -98,7 +95,8 @@ instance RewriteC a => RewriteC (MExpr -> a) where
   getRewrite rule = Rewrite {
     holes = holes . getRewrite . rule . Hole $ pid,
     rid   = pid + 1
-  } where pid = 0 -- rid $ getRewrite undefined
+  } where 
+    pid = rid $ getRewrite (bt :: a)
 
 -- Yet another pointless transformation
 transformM :: Int -> MExpr -> MExpr
