@@ -1,13 +1,14 @@
 name:                disappoint
-version:             0.0.1
+version:             0.1.0
 synopsis:            Pointfree refactoring library
 description:
     Disappoint turns the stand-alone command-line pointfree package into a
-    library and adds some very superficial haskell-src parsing on top.
+    library. I can't think of why anyone else would ever need this package, but
+    here it is.
 license:             OtherLicense
 license-file:        LICENSE
 category:            Tool
-build-depends:       base, parsec, mtl, containers, array, MissingH, haskell-src-exts
+build-depends:       base, parsec, mtl, containers, array
 build-type:          Simple
 Exposed-modules: 
     Language.Haskell.Pointfree,
