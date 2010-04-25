@@ -1,4 +1,5 @@
 {-# OPTIONS -fvia-C #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 
 module Language.Haskell.Pointfree.Common (
         Fixity(..), Expr(..), Pattern(..), Decl(..), TopLevel(..),
@@ -25,6 +26,9 @@ import Text.ParserCombinators.Parsec.Expr (Assoc(..))
 
 import GHC.Base (assert)
 
+import Data.Data (Data(..))
+import Data.Typeable (Typeable(..))
+
 
 -- The rewrite rules can be found at the end of the file Rules.hs
 
@@ -32,7 +36,7 @@ import GHC.Base (assert)
 -- is worth threading through the whole thing is worth the effort,
 -- but it stays that way until the prettyprinting algorithm gets more
 -- sophisticated.
-data Fixity = Pref | Inf deriving Show
+data Fixity = Pref | Inf deriving (Show, Data, Typeable)
 
 instance Eq Fixity where
   _ == _ = True
@@ -45,20 +49,21 @@ data Expr
   | Lambda Pattern Expr
   | App Expr Expr
   | Let [Decl] Expr
-  deriving (Eq, Ord)
+  deriving (Eq, Ord, Data, Typeable)
 
 data Pattern
   = PVar String 
   | PCons Pattern Pattern
   | PTuple Pattern Pattern
-  deriving (Eq, Ord)
+  deriving (Eq, Ord, Data, Typeable)
 
 data Decl = Define { 
   declName :: String, 
   declExpr :: Expr
-} deriving (Eq, Ord)
+} deriving (Eq, Ord, Data, Typeable)
 
-data TopLevel = TLD Bool Decl | TLE Expr deriving (Eq, Ord)
+data TopLevel = TLD Bool Decl | TLE Expr
+  deriving (Eq, Ord, Data, Typeable)
 
 mapTopLevel :: (Expr -> Expr) -> TopLevel -> TopLevel
 mapTopLevel f tl = case getExpr tl of (e, c) -> c $ f e
