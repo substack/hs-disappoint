@@ -1,4 +1,5 @@
 {-# OPTIONS -fvia-C -O2 -optc-O3 #-}
+{-# LANGUAGE PatternGuards #-}
 --
 -- Todo, use Language.Haskell
 --

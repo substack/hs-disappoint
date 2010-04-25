@@ -1,5 +1,5 @@
 name:                disappoint
-version:             0.1.0
+version:             0.1.1
 synopsis:            Pointfree refactoring library
 description:
     Disappoint turns the stand-alone command-line pointfree package into a
